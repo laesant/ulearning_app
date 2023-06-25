@@ -1,29 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ulearning_app/app_blocs.dart';
 import 'package:ulearning_app/app_events.dart';
 import 'package:ulearning_app/app_states.dart';
+import 'package:ulearning_app/pages/welcome/welcome.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
+final GoRouter _router = GoRouter(routes: <RouteBase>[
+  GoRoute(
+      path: '/',
+      builder: (BuildContext context, GoRouterState state) {
+        return const Welcome();
+      })
+]);
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) => AppBlocs(),
-        child: MaterialApp(
-            title: 'Flutter Demo',
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-                colorScheme: ColorScheme.fromSeed(
-                    seedColor: const Color.fromARGB(255, 238, 7, 199)),
-                useMaterial3: true),
-            home: const MyHomePage()));
+        child: ScreenUtilInit(
+            builder: (context, widget) => MaterialApp.router(
+                  debugShowCheckedModeBanner: false,
+                  theme: ThemeData(
+                      colorScheme: ColorScheme.fromSeed(
+                          seedColor: const Color.fromARGB(255, 238, 7, 199)),
+                      useMaterial3: true),
+                  routerConfig: _router,
+                )));
   }
 }
 
