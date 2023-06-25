@@ -23,34 +23,19 @@ class MyApp extends StatelessWidget {
                 colorScheme: ColorScheme.fromSeed(
                     seedColor: const Color.fromARGB(255, 238, 7, 199)),
                 useMaterial3: true),
-            home: const MyHomePage(title: 'Flutter Demo Home Page')));
+            home: const MyHomePage()));
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: const Text("Flutter Demo Home Page"),
       ),
       body: Center(child: BlocBuilder<AppBlocs, AppStates>(
         builder: (context, state) {
