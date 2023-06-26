@@ -8,18 +8,26 @@ class PageWelcome extends StatelessWidget {
       required this.buttonName,
       required this.title,
       required this.subTitle,
-      required this.imagePath});
+      required this.imagePath,
+      required this.pageController});
 
   final int index;
   final String buttonName;
   final String title;
   final String subTitle;
   final String imagePath;
+  final PageController pageController;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(width: 345.w, height: 345.w, child: Image.asset(imagePath)),
+        SizedBox(
+            width: 345.w,
+            height: 345.w,
+            child: Image.asset(
+              imagePath,
+              fit: BoxFit.cover,
+            )),
         Text(
           title,
           style: TextStyle(
@@ -38,28 +46,32 @@ class PageWelcome extends StatelessWidget {
                 fontWeight: FontWeight.normal),
           ),
         ),
-        Container(
-            width: 325.w,
-            height: 60,
-            alignment: Alignment.center,
-            margin: EdgeInsets.only(top: 100.h, left: 15.w, right: 15.w),
-            decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(15.w),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey.withOpacity(0.3),
-                      spreadRadius: 1,
-                      blurRadius: 2,
-                      offset: const Offset(0, 2))
-                ]),
-            child: Text(
-              buttonName,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.normal),
-            ))
+        SizedBox(height: 100.h),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15.w),
+          child: FilledButton(
+              style: FilledButton.styleFrom(
+                  fixedSize: Size(MediaQuery.of(context).size.width, 60),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.w),
+                  )),
+              onPressed: () {
+                if (index < 2) {
+                  pageController.animateToPage(index + 1,
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.decelerate);
+                } else {
+                  // jump to a new page
+                }
+              },
+              child: Text(
+                buttonName,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.normal),
+              )),
+        )
       ],
     );
   }

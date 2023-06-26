@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ulearning_app/app_blocs.dart';
 import 'package:ulearning_app/app_events.dart';
 import 'package:ulearning_app/app_states.dart';
+import 'package:ulearning_app/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:ulearning_app/pages/welcome/welcome.dart';
 
 void main() {
@@ -24,13 +25,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => AppBlocs(),
+        create: (context) => WelcomeBloc(),
         child: ScreenUtilInit(
             builder: (context, widget) => MaterialApp.router(
                   debugShowCheckedModeBanner: false,
                   theme: ThemeData(
                       colorScheme: ColorScheme.fromSeed(
-                          seedColor: const Color.fromARGB(255, 238, 7, 199)),
+                          seedColor: const Color.fromARGB(255, 49, 99, 190)),
                       useMaterial3: true),
                   routerConfig: _router,
                 )));
