@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class PageWelcome extends StatelessWidget {
   const PageWelcome(
@@ -62,6 +63,7 @@ class PageWelcome extends StatelessWidget {
                       curve: Curves.decelerate);
                 } else {
                   // jump to a new page
+                  context.go("/signIn");
                 }
               },
               child: Text(
